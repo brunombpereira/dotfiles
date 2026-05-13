@@ -1,0 +1,40 @@
+[user]
+	name = Bruno Borlido Pereira
+	email = brunoborlido@gmail.com
+
+[init]
+	defaultBranch = main
+
+[pull]
+	rebase = true
+
+[push]
+	autoSetupRemote = true
+	default = current
+
+[core]
+	editor = nvim
+	autocrlf = input
+	excludesfile = ~/.gitignore_global
+
+[color]
+	ui = auto
+
+[alias]
+	st = status -sb
+	co = checkout
+	ci = commit
+	br = branch
+	lg = log --oneline --graph --decorate -20
+	last = log -1 HEAD --stat
+	unstage = reset HEAD --
+	amend = commit --amend --no-edit
+
+[diff]
+	colorMoved = zebra
+
+[merge]
+	conflictStyle = zdiff3
+
+[rerere]
+	enabled = true

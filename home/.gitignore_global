@@ -1,0 +1,22 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Per-project env / secrets (safety net — projects should ignore these too)
+.env
+.env.local
+.envrc
+
+# Common build / dependency artifacts
+node_modules/
+.bundle/
+log/
+tmp/
+*.tsbuildinfo
