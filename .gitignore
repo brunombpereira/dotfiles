@@ -1,0 +1,12 @@
+# Backup directories created by lib/50-symlinks.sh
+.dotfiles-backup-*/
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+*.swp
+*.swo
+
+# Local-only test scratch
+/scratch/
