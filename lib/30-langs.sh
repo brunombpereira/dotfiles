@@ -2,7 +2,8 @@
 set -euo pipefail
 
 readonly STEP="30-langs"
-readonly ASDF_DIR="$HOME/.asdf"
+# Note: ASDF_DIR cannot be readonly because asdf.sh itself sets it.
+ASDF_DIR="$HOME/.asdf"
 readonly ASDF_VERSION="v0.14.1"
 readonly RUBY_VERSION="3.3.6"
 readonly NODE_MAJOR="22"

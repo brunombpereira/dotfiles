@@ -8,8 +8,17 @@ echo "[$STEP] installing zsh..."
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq zsh
 
 if ! command -v starship >/dev/null 2>&1; then
-    echo "[$STEP] installing starship..."
-    curl -fsSL https://starship.rs/install.sh | sh -s -- --yes >/dev/null
+    echo "[$STEP] installing starship from GitHub releases..."
+    # The official starship.rs/install.sh script tries `sudo -v` which can hang
+    # under non-interactive PTY conditions even with NOPASSWD. Install the
+    # binary directly to avoid that path.
+    STARSHIP_VERSION="$(curl -fsSL https://api.github.com/repos/starship/starship/releases/latest \
+        | jq -r .tag_name)"
+    curl -fsSL "https://github.com/starship/starship/releases/download/${STARSHIP_VERSION}/starship-x86_64-unknown-linux-gnu.tar.gz" \
+        -o /tmp/starship.tar.gz
+    tar -xf /tmp/starship.tar.gz -C /tmp starship
+    sudo install -m 0755 /tmp/starship /usr/local/bin/starship
+    rm /tmp/starship.tar.gz /tmp/starship
 fi
 
 echo "[$STEP] cloning zsh plugins to $ZSH_PLUGIN_DIR..."
