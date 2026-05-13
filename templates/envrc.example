@@ -1,0 +1,11 @@
+# Copy to .envrc at the root of a project, then run: direnv allow
+# Requires direnv (installed by lib/20-cli-tools.sh).
+
+# Load secrets from a local .env (gitignored)
+# dotenv backend/.env
+
+# Add project's bin/ to PATH (handy for Rails: bin/rails, bin/setup)
+# PATH_add backend/bin
+
+# Auto-switch Ruby / Node versions based on the project's .tool-versions
+use asdf
