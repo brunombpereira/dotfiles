@@ -29,14 +29,37 @@ if ! sudo -u postgres psql -tAc \
 fi
 
 if ! sudo grep -q "# dotfiles-trust-local" "$PG_HBA"; then
-    echo "[$STEP] adding trust auth for $USER on localhost in pg_hba.conf..."
-    sudo tee -a "$PG_HBA" >/dev/null <<EOF
-
-# dotfiles-trust-local — managed by ~/.dotfiles/lib/40-postgres.sh
-local   all             $USER                                   trust
-host    all             $USER           127.0.0.1/32            trust
-host    all             $USER           ::1/128                 trust
-EOF
+    echo "[$STEP] adding trust auth for $USER at top of pg_hba.conf..."
+    # The trust rules MUST come before the default catch-all
+    # `host all all ... scram-sha-256` line — pg_hba.conf is processed in
+    # order and the first match wins. Insert immediately after the
+    # `# TYPE  DATABASE` header so our rules are evaluated first.
+    sudo python3 - "$PG_HBA" "$USER" <<'PYEOF'
+import sys, shutil, time
+path, user = sys.argv[1], sys.argv[2]
+shutil.copy(path, f"{path}.bak.{int(time.time())}")
+with open(path) as f:
+    lines = f.readlines()
+block = [
+    "\n",
+    "# dotfiles-trust-local -- managed by ~/.dotfiles/lib/40-postgres.sh\n",
+    f"local   all             {user}                                   trust\n",
+    f"host    all             {user}           127.0.0.1/32            trust\n",
+    f"host    all             {user}           ::1/128                 trust\n",
+    "\n",
+]
+out, done = [], False
+for line in lines:
+    out.append(line)
+    if not done and line.startswith("# TYPE  DATABASE"):
+        out.extend(block)
+        done = True
+if not done:
+    # Fallback: prepend (no header found — unusual pg_hba)
+    out = block + lines
+with open(path, "w") as f:
+    f.writelines(out)
+PYEOF
     if command -v systemctl >/dev/null 2>&1 && systemctl is-system-running --quiet 2>/dev/null; then
         sudo systemctl reload postgresql
     else
