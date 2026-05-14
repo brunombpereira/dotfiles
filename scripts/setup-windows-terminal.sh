@@ -58,6 +58,9 @@ else
     done
 
     echo "[$STEP] registering fonts in HKCU..."
+    # shellcheck disable=SC2016
+    # The single-quoted heredoc below is a PowerShell here-string (@'...'@);
+    # $vars are PowerShell, not bash — they must not expand here.
     /mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe \
         -NoProfile -Command @'
 $ErrorActionPreference = "Stop"

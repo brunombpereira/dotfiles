@@ -32,9 +32,11 @@ jobs:
           chmod +x /tmp/shfmt
           sudo mv /tmp/shfmt /usr/local/bin/shfmt
 
-      # Settings mirror .editorconfig: 4-space indent, indent switch cases.
+      # Flags mirror .editorconfig + local pre-commit / CONTRIBUTING.md:
+      # -bn (binary ops may start a line, matches the repo's leading-pipe style),
+      # -i 4 (4-space indent), -ci (indent switch cases).
       - name: Check formatting (shfmt -d)
-        run: shfmt -d -i 4 -ci install.sh lib/*.sh scripts/*.sh
+        run: shfmt -bn -i 4 -ci -d install.sh lib/*.sh scripts/*.sh
 
   zsh-syntax:
     runs-on: ubuntu-latest
