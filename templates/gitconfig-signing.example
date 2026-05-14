@@ -1,0 +1,43 @@
+# Snippet to enable signed commits. Append (or merge) into ~/.gitconfig
+# after replacing the placeholders.
+#
+# This repo's default .gitconfig is unsigned by design (works out of the box
+# on a fresh WSL box). Add this when you're ready to sign.
+#
+# Two flavors below — pick one.
+#
+# ─── A) SSH signing (simplest; reuses your existing SSH key) ────────────
+#
+# Prereqs: git >= 2.34, an ssh key, and the corresponding public key
+# registered as a signing key on GitHub (Settings > SSH and GPG keys >
+# "New SSH key" with type = Signing Key).
+#
+# [user]
+#     signingkey = ~/.ssh/id_ed25519.pub
+# [gpg]
+#     format = ssh
+# [gpg "ssh"]
+#     allowedSignersFile = ~/.config/git/allowed_signers
+# [commit]
+#     gpgsign = true
+# [tag]
+#     gpgsign = true
+#
+# Then create ~/.config/git/allowed_signers with one line per trusted signer:
+#   you@example.com ssh-ed25519 AAAA...your-public-key...
+#
+# ─── B) GPG signing ──────────────────────────────────────────────────────
+#
+# Prereqs: gpg installed (apt install gnupg), a key generated
+# (gpg --full-generate-key), and the public key uploaded to GitHub.
+#
+# [user]
+#     signingkey = <YOUR_GPG_KEY_ID>
+# [commit]
+#     gpgsign = true
+# [tag]
+#     gpgsign = true
+#
+# WSL note: gpg-agent inside WSL works for signing commits. If you'd rather
+# use a YubiKey or a Windows-side gpg, set up a socket bridge — see
+# https://justyn.io/blog/using-a-yubikey-for-gpg-in-wsl-2/ for one recipe.

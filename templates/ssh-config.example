@@ -1,0 +1,30 @@
+# ~/.ssh/config — copy to ~/.ssh/config and edit
+#
+# After copying:
+#   chmod 600 ~/.ssh/config
+#
+# Generate a key if you don't have one:
+#   ssh-keygen -t ed25519 -C "you@example.com"
+#   eval "$(ssh-agent -s)" && ssh-add ~/.ssh/.ssh/id_ed25519
+#
+# WSL note: if you want to share keys with Windows OpenSSH, symlink:
+#   ln -s /mnt/c/Users/<you>/.ssh/id_ed25519     ~/.ssh/id_ed25519
+#   ln -s /mnt/c/Users/<you>/.ssh/id_ed25519.pub ~/.ssh/id_ed25519.pub
+# and ensure permissions in Windows are tight (icacls / OpenSSH agent).
+
+Host *
+    AddKeysToAgent yes
+    ServerAliveInterval 60
+    ServerAliveCountMax 3
+    HashKnownHosts yes
+
+Host github.com
+    User git
+    IdentityFile ~/.ssh/id_ed25519
+    IdentitiesOnly yes
+
+# Example named host — uncomment and edit:
+# Host dev-box
+#     HostName 10.0.0.42
+#     User bruno
+#     IdentityFile ~/.ssh/id_ed25519

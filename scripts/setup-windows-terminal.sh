@@ -137,7 +137,7 @@ jq --argjson scheme "$NEXO_SCHEME" '
             . + { "colorScheme": "Nexo Half Dark",
                   "font": { "face": "CaskaydiaCove NFM" } }
         else . end)
-' "$BACKUP" > "$WT_SETTINGS"
+' "$BACKUP" >"$WT_SETTINGS"
 
 echo "[$STEP] done."
 echo "[$STEP] restart Windows Terminal to apply (close all windows, reopen)."

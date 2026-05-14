@@ -1,0 +1,24 @@
+# Install with `pre-commit install` (apt: `pre-commit`, pip: `pip install pre-commit`).
+# Mirrors the checks in .github/workflows/shellcheck.yml so PRs land green.
+
+repos:
+  - repo: https://github.com/koalaman/shellcheck-precommit
+    rev: v0.9.0
+    hooks:
+      - id: shellcheck
+        files: '\.(sh|bash)$|^install\.sh$'
+
+  - repo: https://github.com/scop/pre-commit-shfmt
+    rev: v3.8.0-1
+    hooks:
+      - id: shfmt
+        args: [-bn, -i, "4", -ci, -d]
+        files: '\.(sh|bash)$|^install\.sh$'
+
+  - repo: local
+    hooks:
+      - id: zsh-parse
+        name: zsh -n (parse zsh files)
+        language: system
+        entry: zsh -n
+        files: '^home/\.zshrc$|^home/\.zsh/.*\.zsh$'
