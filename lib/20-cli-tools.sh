@@ -29,4 +29,16 @@ if ! command -v lazygit >/dev/null 2>&1; then
     rm /tmp/lazygit.tar.gz /tmp/lazygit
 fi
 
+# fastfetch — not in Ubuntu 24.04 repos, install .deb from GitHub releases
+if ! command -v fastfetch >/dev/null 2>&1; then
+    echo "[$STEP] installing fastfetch from GitHub releases..."
+    FASTFETCH_VERSION=$(curl -fsSL https://api.github.com/repos/fastfetch-cli/fastfetch/releases/latest \
+        | jq -r .tag_name)
+    ARCH=$(dpkg --print-architecture)
+    curl -fsSL "https://github.com/fastfetch-cli/fastfetch/releases/download/${FASTFETCH_VERSION}/fastfetch-linux-${ARCH}.deb" \
+        -o /tmp/fastfetch.deb
+    sudo dpkg -i /tmp/fastfetch.deb
+    rm /tmp/fastfetch.deb
+fi
+
 echo "[$STEP] done"

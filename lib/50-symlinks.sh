@@ -14,8 +14,8 @@ LINKS=(
     ".zsh"
     ".gitconfig"
     ".gitignore_global"
-    ".config/starship.toml"
     ".config/nvim/init.lua"
+    ".config/fastfetch"
 )
 
 backup_if_real_file() {

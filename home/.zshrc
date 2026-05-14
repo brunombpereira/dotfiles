@@ -44,6 +44,15 @@ ZSH_PLUGINS="$HOME/.local/share/zsh-plugins"
 command -v direnv >/dev/null && eval "$(direnv hook zsh)"
 
 # ──────────────────────────────────────────────────────────────────────
-# Starship prompt (last)
+# Prompt: a port of Ubuntu-24's bash PS1 lives in ~/.zsh/prompt.zsh
+# (loaded by the partials block above). Starship is intentionally
+# not initialised here.
 # ──────────────────────────────────────────────────────────────────────
-command -v starship >/dev/null && eval "$(starship init zsh)"
+
+# ──────────────────────────────────────────────────────────────────────
+# Banner on shell launch (once per terminal tab, not in subshells)
+# ──────────────────────────────────────────────────────────────────────
+if [[ -o interactive ]] && [[ -z "$NEXO_BANNER_SHOWN" ]] && command -v fastfetch >/dev/null 2>&1; then
+    export NEXO_BANNER_SHOWN=1
+    fastfetch
+fi
