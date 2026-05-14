@@ -44,6 +44,21 @@ ZSH_PLUGINS="$HOME/.local/share/zsh-plugins"
 command -v direnv >/dev/null && eval "$(direnv hook zsh)"
 
 # ──────────────────────────────────────────────────────────────────────
+# fzf keybindings + completion (Ctrl-R history, Ctrl-T files, Alt-C cd)
+# Ubuntu ships these examples; sourcing is the supported way to enable
+# them when installed via apt (no `fzf --zsh` like the brew build).
+# ──────────────────────────────────────────────────────────────────────
+[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] \
+    && source /usr/share/doc/fzf/examples/key-bindings.zsh
+[ -f /usr/share/doc/fzf/examples/completion.zsh ] \
+    && source /usr/share/doc/fzf/examples/completion.zsh
+
+# ──────────────────────────────────────────────────────────────────────
+# zoxide (smarter cd: `z foo` jumps to a frecent dir matching foo)
+# ──────────────────────────────────────────────────────────────────────
+command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
+
+# ──────────────────────────────────────────────────────────────────────
 # Prompt: a port of Ubuntu-24's bash PS1 lives in ~/.zsh/prompt.zsh
 # (loaded by the partials block above). Starship is intentionally
 # not initialised here.

@@ -14,6 +14,7 @@ LINKS=(
     ".zsh"
     ".gitconfig"
     ".gitignore_global"
+    ".gemrc"
     ".config/nvim/init.lua"
     ".config/fastfetch"
 )

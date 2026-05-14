@@ -10,7 +10,8 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq \
     eza \
     fzf \
     httpie \
-    ripgrep
+    ripgrep \
+    zoxide
 
 # Ubuntu ships bat as 'batcat' to avoid conflict with another package — alias as 'bat'
 if command -v batcat >/dev/null 2>&1 && ! command -v bat >/dev/null 2>&1; then

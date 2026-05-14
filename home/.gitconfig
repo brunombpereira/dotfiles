@@ -38,3 +38,9 @@
 
 [rerere]
 	enabled = true
+
+# Load ~/.gitconfig.local last so it overrides anything above.
+# Forkers: drop your own [user] / [commit] / signing blocks there
+# instead of editing this file. (Missing file is silently ignored.)
+[include]
+	path = ~/.gitconfig.local

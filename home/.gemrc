@@ -1,0 +1,3 @@
+# Skip rdoc/ri install for every `gem install` — saves ~30s per gem.
+# Override with `gem install --document` when you actually want docs.
+gem: --no-document
