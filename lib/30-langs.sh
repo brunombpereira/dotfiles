@@ -19,8 +19,8 @@ fi
 . "$ASDF_DIR/asdf.sh"
 
 echo "[$STEP] adding asdf plugins (ruby, nodejs)..."
-asdf plugin add ruby     https://github.com/asdf-vm/asdf-ruby.git    2>/dev/null || true
-asdf plugin add nodejs   https://github.com/asdf-vm/asdf-nodejs.git  2>/dev/null || true
+asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git 2>/dev/null || true
+asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git 2>/dev/null || true
 
 echo "[$STEP] installing Ruby $RUBY_VERSION (this takes 3-5 min on first run)..."
 asdf install ruby "$RUBY_VERSION"
@@ -35,6 +35,7 @@ asdf install nodejs "$NODE_LATEST"
 asdf global nodejs "$NODE_LATEST"
 
 echo "[$STEP] installing bundler gem..."
-gem install bundler --silent --no-document
+# Pin to 2.5.x — unpinned re-runs can surprise existing apps with a major bump.
+gem install bundler --silent --no-document --version '~> 2.5'
 
 echo "[$STEP] done"

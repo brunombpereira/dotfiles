@@ -23,6 +23,7 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq \
     libxslt1-dev \
     libyaml-dev \
     locales \
+    python3-minimal \
     software-properties-common \
     unzip \
     zlib1g-dev

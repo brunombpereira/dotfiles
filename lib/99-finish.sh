@@ -11,7 +11,7 @@ cat <<'EOF'
 Next steps:
 
   1. Close this WSL session and open a fresh one so your default shell
-     becomes zsh and your starship prompt loads.
+     becomes zsh and your custom PS1 prompt loads.
 
        $ exit
        (then open a new WSL terminal)

@@ -28,7 +28,9 @@ if ! sudo -u postgres psql -tAc \
     sudo -u postgres createuser --createdb --login "$USER"
 fi
 
-if ! sudo grep -q "# dotfiles-trust-local" "$PG_HBA"; then
+if [ ! -f "$PG_HBA" ]; then
+    echo "[$STEP] WARN: $PG_HBA not found; skipping trust-auth setup" >&2
+elif ! sudo grep -q "# dotfiles-trust-local" "$PG_HBA"; then
     echo "[$STEP] adding trust auth for $USER at top of pg_hba.conf..."
     # The trust rules MUST come before the default catch-all
     # `host all all ... scram-sha-256` line — pg_hba.conf is processed in

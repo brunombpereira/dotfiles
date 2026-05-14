@@ -34,8 +34,12 @@ _nexo_prompt_git_block() {
         || branch=$(git rev-parse --short HEAD 2>/dev/null)
     [[ -z $branch ]] && return
 
+    # Use --untracked-files=no: --porcelain scans the whole worktree for
+    # untracked files which is O(N) in repo size and noticeable on big
+    # monorepos. Tradeoff: a brand-new file doesn't redden the prompt
+    # until it's `git add`ed. Worth it for sub-100ms renders.
     local fg bg
-    if [[ -z $(git status --porcelain 2>/dev/null) ]]; then
+    if [[ -z $(git status --porcelain --untracked-files=no 2>/dev/null) ]]; then
         fg=$_PR_GREEN; bg=$_PR_GREENBG     # clean → green
     else
         fg=$_PR_RED;   bg=$_PR_REDBG       # dirty → red
