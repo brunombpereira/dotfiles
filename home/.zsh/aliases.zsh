@@ -26,3 +26,9 @@ alias dc='docker compose'
 
 # Safety
 alias rm='rm -i'
+
+# Shell — re-exec zsh as a login shell to pick up changes to
+# .zshrc / .zshenv / asdf / env without losing the current cwd.
+# Does not restart the WSL distro itself; use `wsl.exe --terminate <name>`
+# from a Windows shell for that.
+alias reload='exec zsh -l'
