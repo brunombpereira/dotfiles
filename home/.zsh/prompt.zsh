@@ -22,7 +22,7 @@ typeset -g _PR_LCAP=$''      # left cap shape
 typeset -g _PR_RCAP=$''      # right cap / transition arrow
 typeset -g _PR_BRANCH=$''    # diamond before branch name
 typeset -g _PR_FOLDER=$''    # icon before working directory
-typeset -g _PR_CLOCK=$''     # clock icon before time
+typeset -g _PR_CLOCK=$''     # clock icon before time
 
 # Emits the leading green/red [branch] block when inside a git repo;
 # empty otherwise. Wrap colour escapes in %{%} so zsh counts widths
