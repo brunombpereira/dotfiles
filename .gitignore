@@ -1,6 +1,9 @@
 # Backup directories created by lib/50-symlinks.sh
 .dotfiles-backup-*/
 
+# Bootstrap installer log
+/install.log
+
 # Editor / OS
 .vscode/
 .idea/
