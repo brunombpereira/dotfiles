@@ -18,7 +18,7 @@ typeset -g _PR_CYANBG="$(tput setab 6)"
 typeset -g _PR_NC="$(tput sgr0)"
 
 # Nerd Font glyphs — same codepoints used by Ubuntu-24's PS1.
-typeset -g _PR_LCAP=$''      # left cap shape
+typeset -g _PR_LCAP=$''      # left cap shape
 typeset -g _PR_RCAP=$''      # right cap / transition arrow
 typeset -g _PR_BRANCH=$''    # diamond before branch name
 typeset -g _PR_FOLDER=$''    # icon before working directory
