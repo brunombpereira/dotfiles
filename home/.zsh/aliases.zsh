@@ -29,7 +29,8 @@ alias rm='rm -i'
 
 # Shell — re-exec zsh as a login shell to pick up changes to
 # .zshrc / .zshenv / asdf / env without losing the current cwd.
-# Unsets NEXO_BANNER_SHOWN so the fastfetch banner is re-shown.
+# Clears the screen + scrollback and unsets NEXO_BANNER_SHOWN so the
+# session looks like a freshly-opened terminal (banner re-renders).
 # Does not restart the WSL distro itself; use `wsl.exe --terminate <name>`
 # from a Windows shell for that.
-alias reload='unset NEXO_BANNER_SHOWN; exec zsh -l'
+alias reload='unset NEXO_BANNER_SHOWN; printf "\033c\033[3J"; exec zsh -l'
